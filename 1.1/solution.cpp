@@ -1,20 +1,12 @@
 #include <iostream> 
 #include <unordered_set>
+#include <vector>
 
 using namespace std;
 
-bool hasAllUniqueCharacters(string s) {
-    unordered_set <char> charOfString;
-    for (char c : s) {
-        if (charOfString.find(c) == charOfString.end())
-            charOfString.insert(c);
-        else 
-            return false;
-    }
-    return true;
-}
-
-bool hasAllUniqueCharacters_NoAdditionalDS(string s) {
+// No DS
+// O(nlogn)
+bool hasAllUniqueCharacters_NoDS(string s) {
     sort(s.begin(), s.end());
     int n = s.length();
     for (int i = 0; i < n - 1; i++) {
@@ -24,12 +16,52 @@ bool hasAllUniqueCharacters_NoAdditionalDS(string s) {
     return true;
 }
 
+// Using Set DS
+// O(n)
+bool hasAllUniqueCharacters_Set(string s) {
+    unordered_set <char> charSet;
+
+    for (char c : s) {
+        if (charSet.find(c) != charSet.end()) 
+            return false;
+        charSet.insert(c);
+    }
+
+    return true;
+}
+
+// Using array of bool as set
+// O(n)
+bool hasAllUniqueCharacters(string s) {
+    if (s.length() > 128) return false;
+
+    vector <bool> charSet(128);
+    for (int i = 0; i < s.length(); i++) {
+        int asciiNum = s[i];
+        if(charSet[asciiNum]) 
+            return false;
+        charSet[asciiNum] = true;
+    }
+
+    return true;
+}
+
 int main() {
 
-    string s = "aa";
+    // vector<string> test_strings = {"aple", "apple", "a", "", "\taewer\t"}; c++ 11 supported
+    vector<string> test_strings;
+    test_strings.push_back("aple");
+    test_strings.push_back("apple");
+    test_strings.push_back("a");
+    test_strings.push_back("");
+    test_strings.push_back("\taewer\t");
 
-    cout << hasAllUniqueCharacters(s) << endl;
-    cout << hasAllUniqueCharacters_NoAdditionalDS(s) << endl;
+    for (string s : test_strings) {
+        cout << "\n" + s << endl;
+        cout << hasAllUniqueCharacters_NoDS(s) << endl;
+        cout << hasAllUniqueCharacters_Set(s) << endl;
+        cout << hasAllUniqueCharacters(s) << endl;
+    }
 
     return 0;
 }
