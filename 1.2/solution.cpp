@@ -50,5 +50,5 @@ int main() {
         reverseString(str);
         cout << "Ans: " << str << endl;
     }
-
+    return 0;
 }
