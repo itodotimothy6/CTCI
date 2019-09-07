@@ -9,16 +9,16 @@ using namespace std;
 bool isAnagram(string s1, string s2) {
     if (s1.length() != s2.length()) return false;
 
-    unordered_map<char, int> charSet;
+    unordered_map<char, int> charMap;
     for (int i = 0; i < s1.length(); i++) {
-        charSet[s1[i]]++;
+        charMap[s1[i]]++;
     }
     for (int i = 0; i < s2.length(); i++) {
-        charSet[s2[i]]--;
-        if (charSet[s2[i]] == 0) charSet.erase(s2[i]);
+        charMap[s2[i]]--;
+        if (charMap[s2[i]] == 0) charMap.erase(s2[i]);
     }
 
-    return charSet.empty();
+    return charMap.empty();
 }
 
 int main() {
