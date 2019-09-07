@@ -11,7 +11,7 @@ bool areAnagrams(string one, string two){
 		return false;
 	else{
 		int characters[128];
-		for(int i = 0; i < 26; i++)
+		for(int i = 0; i < 128; i++)
 			characters[i] = 0;
 		bool valid = true;
 		
