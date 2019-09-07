@@ -10,21 +10,21 @@ bool areAnagrams(string one, string two){
 	if(one.length() != two.length())
 		return false;
 	else{
-		int anagram[26];
+		int characters[128];
 		for(int i = 0; i < 26; i++)
-			anagram[i] = 0;
-		bool isAnagram = true;
+			characters[i] = 0;
+		bool valid = true;
 		
 		for(int i = 0; i < one.length(); i++)
-			anagram[one[i] - 'a']++;
+			characters[one[i]]++;
 		for(int i = 0; i < two.length(); i++)
-			anagram[two[i] - 'a']--;
+			characters[two[i]]--;
 		for(int i = 0; i < two.length(); i++)
 		{
-			if(anagram[one[i] - 'a'] > 0 )
-				isAnagram = false;
+			if(characters[one[i]] > 0 )
+				valid = false;
 		}
-		return isAnagram;
+		return valid;
 	}
 }
 
