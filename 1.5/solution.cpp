@@ -5,36 +5,38 @@
 
 using namespace std;
 
-void replaceSpace(char* str, int length) {
-    int noOfSpaces = 0;
-
+void replaceSpace(string &s) {
+    int noOfSpaces = 0, length = s.length();
     for (int i = 0; i < length; i++) {
-        if (str[i] == ' ') noOfSpaces++;
+        if (s[i] == ' ') noOfSpaces++;
     }
 
-    int newLength = length + (noOfSpaces * 2);
-    str[newLength] = '\0';
+    s.resize(length + noOfSpaces * 2);
 
-    for(int i = length - 1; i >= 0; i--) {
-        if(str[i] == ' ') {
-            
-            str[newLength - 1] = '0';
-            str[newLength - 2] = '2';
-            str[newLength - 3] = '%';
-            newLength = newLength - 3;
-            
+    int i = length - 1;
+    int j = s.length() - 1;
+
+    while (i >= 0) {
+        if (s[i] == ' ') {
+            s[j] = '0';
+            s[j-1] = '2';
+            s[j-2] = '%';
+
+            j = j-3; i--;
         }
         else {
-            str[--newLength] = str[i];
+            s[j--] = s[i--];
         }
     }
-
 }
+
 int main() {
-    char s[] = "my boy is good";
 
-    replaceSpace(s, sizeof(s) - 1);
+    string s = "Hello world";
+
     cout << s << endl;
-
+    replaceSpace(s);
+    cout << s << endl;
+    
     return 0;
 }
