@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const int MAX = 100;
+
 void replaceSpace(string &s) {
     int noOfSpaces = 0, length = s.length();
     for (int i = 0; i < length; i++) {
@@ -30,13 +32,59 @@ void replaceSpace(string &s) {
     }
 }
 
+void replaceSpace_cString(char* s) {
+    char* i = s;
+    int noOfSpaces = 0, length = 0;
+
+    // Get the length of string & no of space occurences
+    while (*i) { // This will only return false if i is pointing to null which is where a string terminates
+        if(*i == ' ') noOfSpaces++;
+        length++;
+        i++;
+    }
+
+    // Calculate the new length of string when ' ' is replaced by '%20'
+    int newLength = length + noOfSpaces * 2;
+
+    // Case where new length is greater than max amount of character that was set
+    if (newLength > MAX) {
+        cout << "String exceeds the max limit of char" << endl;
+        return;
+    }
+
+    s[newLength] = '\0'; // The new termination of string
+    length--;
+    newLength--;
+
+    // Starting from the end
+    while(length >= 0) {
+        if (s[length] == ' ') { // If char is space, replace with '&20'
+            s[newLength] = '0';
+            s[newLength-1] = '2';
+            s[newLength-2] = '%';
+
+            newLength = newLength-3; length--;
+        }
+        else {
+            s[newLength--] = s[length--];
+        }
+    }
+}
+
 int main() {
 
-    string s = "Hello world";
+    // string s = "Hello world";
 
-    cout << s << endl;
-    replaceSpace(s);
-    cout << s << endl;
+    // cout << s << endl;
+    // replaceSpace(s);
+    // cout << s << endl;
+
+
+    char str[MAX] = " Hello        ";
+    cout << str << endl;
+    replaceSpace_cString(str);
+    cout << str << endl;
+
     
     return 0;
 }
