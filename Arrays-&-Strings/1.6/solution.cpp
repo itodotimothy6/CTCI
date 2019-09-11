@@ -13,35 +13,34 @@ vector<vector<int> > rotateBy90(vector<vector<int> > matrix) {
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            rotatedMatrix[i][j] = matrix[j][N-i-1];
+            rotatedMatrix[i][j] = matrix[N-j-1][i];
         }
     }
 
     return rotatedMatrix;
 }
 
+// Book solution (Most efficient)
 void rotateBy90_InPlace(vector<vector<int> > &matrix) {
     int N = matrix.size();
 
-    // Iterating over every circular layer 
     for (int layer = 0; layer < N/2; layer++) {
-        int i = layer;
-        int j = layer;
-        int a = (N - 1 - layer*2);
-        int n = a;
+        int first = layer;
+        int last = N - 1 - layer;
 
-        while (j < a) {
-            int top = matrix[i][j];          
-            matrix[i][j] = matrix[n][i];   
-            matrix[n][i] = matrix[a][n];
-            matrix[a][n] = matrix[j][a];
-            matrix[j][a] = top;
+        for (int i = first; i < last; i++) {
+            int offset = i - first;
 
-            j++; n--;
+            int top = matrix[first][i];
+            matrix[first][i] = matrix[last-offset][first];
+            matrix[last-offset][first] = matrix[last][last - offset];
+            matrix[last][last - offset] = matrix[i][last];
+            matrix[i][last] = top;
         }
     }
 }
 
+// My sloution
 // void rotateBy90_InPlace(vector<vector<int> > &matrix) {
 //     int N = matrix.size(), a= 0, num = N - 1;;
 
