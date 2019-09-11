@@ -21,40 +21,63 @@ vector<vector<int> > rotateBy90(vector<vector<int> > matrix) {
 }
 
 void rotateBy90_InPlace(vector<vector<int> > &matrix) {
-    int N = matrix.size(), a= 0, num = N - 1;;
+    int N = matrix.size();
 
-    while (a < N/2) {
-        int b = num;
-        while (b > 0){
-            int i = a, j = a, x = matrix[a][a];
-            
-            while (j < N-a-1) {
-                matrix[i][j] = matrix[i][j+1];
-                j++;
-            }
-            while (i < N-a-1) {
-                matrix[i][j] = matrix[i+1][j];
-                i++;
-            }
-            while (j > a) {
-                matrix[i][j] = matrix[i][j-1];
-                j--;
-            }
-            while (i > a) {
-                matrix[i][j] = matrix[i-1][j];
-                i--;
-            }
+    // Iterating over every circular layer 
+    for (int layer = 0; layer < N/2; layer++) {
+        int i = layer;
+        int j = layer;
+        int a = (N - 1 - layer*2);
+        int n = a;
 
-            matrix[a+1][a] = x;
-            b--;
+        while (j < a) {
+            int top = matrix[i][j];          
+            matrix[i][j] = matrix[n][i];   
+            matrix[n][i] = matrix[a][n];
+            matrix[a][n] = matrix[j][a];
+            matrix[j][a] = top;
+
+            j++; n--;
         }
-        a++;
-        num -= 2;
     }
 }
 
-int main() {
+// void rotateBy90_InPlace(vector<vector<int> > &matrix) {
+//     int N = matrix.size(), a= 0, num = N - 1;;
 
+//     while (a < N/2) {
+//         int b = num;
+//         while (b > 0){
+//             int i = a, j = a, x = matrix[a][a];
+            
+//             while (j < N-a-1) {
+//                 matrix[i][j] = matrix[i][j+1];
+//                 j++;
+//             }
+//             while (i < N-a-1) {
+//                 matrix[i][j] = matrix[i+1][j];
+//                 i++;
+//             }
+//             while (j > a) {
+//                 matrix[i][j] = matrix[i][j-1];
+//                 j--;
+//             }
+//             while (i > a) {
+//                 matrix[i][j] = matrix[i-1][j];
+//                 i--;
+//             }
+
+//             matrix[a+1][a] = x;
+//             b--;
+//         }
+//         a++;
+//         num -= 2;
+//     }
+// }
+
+
+
+int main() {
     vector<vector<int> > matrix;
 
     // Create a num * num matrix
