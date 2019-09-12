@@ -1,3 +1,7 @@
+// Write code to remove duplicates from an unsorted linked list.
+// FOLLOW UP
+// How would you solve this problem if a temporary buffer is not allowed?
+
 #include <iostream>
 #include <unordered_set>
 
@@ -106,8 +110,6 @@ int main(){
     printLinkedlist(head2);
     removeDuplicates2(head2);
     printLinkedlist(head2);
-
-
 
     return 0;
 }
