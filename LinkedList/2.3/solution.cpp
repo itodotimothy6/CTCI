@@ -35,25 +35,16 @@ void printLinkedlist(Node* head) {
     cout << endl;
 }
 
-void removeMiddle(Node* middle) {
-    // Empty list => middle is NULL
-    if (!middle) return;
+bool removeMiddle(Node* middle) {
+    // When the node to be deleted is Null or is the last elem
+    // Can not be deleted given only access to middle
+    if (!middle || !middle->next) return false;
 
-    // If list has 1-2 elem => middle is the last elem
-    // Dangling ptr tho
-    if (!middle->next) {
-        delete middle;
-    }
-
-    while (middle->next->next) {
-        middle->data = middle->next->data;
-        middle = middle->next;
-    }
-
-    Node* last = middle->next;
-    middle->data = last->data;
-    middle->next = NULL;
-    delete last;
+    Node* n = middle->next;
+    middle->data = n->data;
+    middle->next = n->next;
+    delete n;
+    return true;
 }
 
 int main() {
@@ -70,7 +61,7 @@ int main() {
     node4->next = node5;
 
 
-    removeMiddle(node3);
+    cout << removeMiddle(node3) << endl;
     printLinkedlist(node1);
     return 0;
 }
