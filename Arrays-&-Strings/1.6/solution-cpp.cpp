@@ -40,7 +40,7 @@ int main()
 	cout << "Rotated Matrix: " << endl;
 	print(matrix);
 
-	//rotate thrice to get original
+	//rotate 3 more times to get original matrix
 	rotate_90_degrees(matrix);
 	rotate_90_degrees(matrix);
 	rotate_90_degrees(matrix);
