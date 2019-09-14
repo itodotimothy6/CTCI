@@ -45,26 +45,21 @@ public:
     }
     
     int pop() {
-        if (top->next) {
+        if (top) {
             int data = top->data;
             Node* n = top;
             top = top->next;
-            
             delete n;
-            min = minMap[top];
+            
+            if(top) {
+                min = minMap[top];
+            }
+            else {
+                min = INT_MAX;
+            }
+            
             return data;
         }
-        
-        if(top) {
-            int data = top->data;
-            Node* n = top;
-            top = top->next;
-            
-            delete n;
-            min = INT_MAX;
-            return data;
-        }
-        
         return -99999999;
     }
     
@@ -72,7 +67,7 @@ public:
         return min;
     }
     
-    void print() {
+    void print() { // Prints min under
         Node* n = top;
         while (n) {
             cout << n->data << " ";
@@ -83,7 +78,6 @@ public:
         cout << endl;
     }
 };
-
 
 int main() {
     
