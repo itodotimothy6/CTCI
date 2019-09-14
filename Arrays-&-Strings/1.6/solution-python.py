@@ -40,9 +40,9 @@ def main():
 	print_matrix(matrix)
 
 	#rotate 3 more times to get original matrix
-	rotate_90_degress(matrix)
-	rotate_90_degress(matrix)
-	rotate_90_degress(matrix)
+	rotate_90_degress(matrix) #180 degrees
+	rotate_90_degress(matrix) #270 degrees
+	rotate_90_degress(matrix) #360 degrees or back to original
 
 	print("Original matrix: ")
 	print_matrix(matrix)
