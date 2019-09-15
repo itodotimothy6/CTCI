@@ -66,6 +66,10 @@ public:
         }
         cout << endl;
     }
+
+    Node* getTop() {
+        return top;
+    }
 };
 
 
@@ -73,12 +77,6 @@ class SetOfStacks {
     int currentPile = -1;
     vector<Stack> stacks;
 public:
-    // SetOfStacks() {
-    //     currentPile = 0;
-    //     Stack s = Stack();
-    //     stacks.push_back(s);
-    // }
-    
     void push(int n) {
         
         if (currentPile == -1 || stacks[currentPile].getSize() == MAX) {
@@ -117,14 +115,37 @@ public:
     }
     
     int popAt(int pileIndex) {
-        if(pileIndex < stacks.size()) return stacks[pileIndex].pop();
+        if(pileIndex < stacks.size()) {
+            stacks[pileIndex].pop();
+
+
+            while (pileIndex < stacks.size() - 1) {
+                Stack s = stacks[pileIndex + 1];
+                Node* n = s.getTop();
+                
+                if (n->next) {
+                    while (n->next->next) {
+                        n = n->next;
+                    }
+                    Node* bottom = n->next;
+                    n->next = NULL;
+                    stacks[pileIndex].push(bottom->data);
+                    delete bottom;
+                }
+                else {
+                    stacks[pileIndex].push(n->data);
+                    stacks.pop_back();
+                }
+                pileIndex++;
+            }
+
+        }
         return -99999999;
     }
     
 };
 
 int main() {
-    
     SetOfStacks stacks = SetOfStacks();
     stacks.print();
     
@@ -135,11 +156,10 @@ int main() {
     stacks.print();
     cout << endl;
     
-    stacks.popAt(2);
+    stacks.popAt(3);
     
     stacks.print();
     cout << endl;
-    
     
     return 0;
 }
