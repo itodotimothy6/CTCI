@@ -60,7 +60,6 @@ int main() {
     node3->next = node4;
     node4->next = node5;
 
-
     cout << removeMiddle(node3) << endl;
     printLinkedlist(node1);
     return 0;
