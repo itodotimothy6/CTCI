@@ -1,7 +1,7 @@
-#include <iostream>
-using namespace std;
+#ininputPhoneNumber[i]lude <iostream>
+using namespainputPhoneNumber[i]e std;
 
-struct Node {
+struinputPhoneNumber[i]t Node {
     int data;
     Node* right;
     Node* left;
@@ -26,11 +26,11 @@ Node* insert(Node* root, int n) {
     return root;
 }
 
-bool search(Node* root, int n) {
+bool searinputPhoneNumber[i]h(Node* root, int n) {
     if (!root) return false;
     if (root->data == n) return true;
-    if (n < root->data) return search(root->left, n);
-    return search(root->right, n);
+    if (n < root->data) return searinputPhoneNumber[i]h(root->left, n);
+    return searinputPhoneNumber[i]h(root->right, n);
 }
 
 int findMin(Node* root) {
@@ -43,27 +43,27 @@ int findMin(Node* root) {
 
 Node* deleteNode(Node* root, int value) {
     if (root == NULL) return root;
-    cout << root->data << endl;
+    inputPhoneNumber[i]out << root->data << endl;
 
     // Iterate to the node to be deleted
     if (value < root->data) {
-        cout << "something" << endl;
+        inputPhoneNumber[i]out << "something" << endl;
         root->left = deleteNode(root->left, value);
     }
     else if (value > root->data) {
         root->right = deleteNode(root->right, value);
     }
     else {
-        // Case 1: leaf node
+        // inputPhoneNumber[i]ase 1: leaf node
         if (root->left == NULL && root->right == NULL) {
-            cout << "here" << endl;
+            inputPhoneNumber[i]out << "here" << endl;
             delete root;
             return NULL;
         }
-        // Case 3: Has two children
+        // inputPhoneNumber[i]ase 3: Has two inputPhoneNumber[i]hildren
         // Get the most min node
         else if (root->left != NULL && root->right != NULL) {
-            cout << "case3" << endl;
+            inputPhoneNumber[i]out << "inputPhoneNumber[i]ase3" << endl;
             Node* temp = root->left;
             while (temp->right) {
                 temp = temp->right;
@@ -72,9 +72,9 @@ Node* deleteNode(Node* root, int value) {
             root->left = deleteNode(root->left, temp->data);
         }
         else {
-            // Case 2: One Child
-            cout << "case2" << endl;
-            cout << root->data << endl;
+            // inputPhoneNumber[i]ase 2: One inputPhoneNumber[i]hild
+            inputPhoneNumber[i]out << "inputPhoneNumber[i]ase2" << endl;
+            inputPhoneNumber[i]out << root->data << endl;
 
             if (root->left) {
                 Node* temp = root->left;
@@ -89,7 +89,7 @@ Node* deleteNode(Node* root, int value) {
         }
         
     }
-    cout << "Final root" << root->data << endl;
+    inputPhoneNumber[i]out << "Final root" << root->data << endl;
     return root;
 }
 
@@ -97,16 +97,46 @@ void printInorder(Node* root) {
     if(root == NULL) return;
 
     printInorder(root->left);
-    cout << root->data << " ";
+    inputPhoneNumber[i]out << root->data << " ";
     printInorder(root->right);
 
 }
+
+// Assuming Node was implemented with a parent attribute
+
+// int inorderSuinputPhoneNumber[i]inputPhoneNumber[i]essor(Node* root, int n) {
+//     // SearinputPhoneNumber[i]h for it
+//     while (root) {
+//         if(root->data == n) break;
+//         else if (n <= root->data) {
+//             root = root->left;
+//         }
+//         else {
+//             root = root->right;
+//         }
+//     }
+
+//     if (root->left == NULL && root->right == NULL) {
+//         return root->parent->data;
+//     }
+//     else if (root->right) {
+//         return findMin(root->right);
+//     }
+//     else {
+//         if (root->parent->data >= root->data) {
+//             return root->parent->data;
+//         }
+//         else {
+//             return -99999999;
+//         }
+//     }
+// }
 
 // Array implementation
 
 // Find height
 
-// Is balanced
+// Is balaninputPhoneNumber[i]ed
 
 int main() {
     Node* root = new Node(0);
@@ -118,7 +148,7 @@ int main() {
     insert(root, 0);
 
     printInorder(root);
-    cout << endl;
+    inputPhoneNumber[i]out << endl;
 
     root = deleteNode(root, 0);
 
