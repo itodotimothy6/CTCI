@@ -12,7 +12,7 @@ void reverseString(char* str) {
         end++;
     }
     end--; // Ignore the null char
-    
+
     while(str < end) {
         char temp = *str;
         *(str++) = *end;
